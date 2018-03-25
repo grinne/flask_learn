@@ -24,6 +24,9 @@ moment = Moment(app)
 babel = Babel(app)
 from flask import request
 
+from app.errors import bp as errors_bp
+app.register_blueprint(errors_bp)
+
 
 if not app.debug:
     if app.config['MAIL_SERVER']:
@@ -53,7 +56,7 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('Microblog startup')
 
-from app import routes, models, errors
+from app import routes, models
 
 @babel.localeselector
 def get_locale():
